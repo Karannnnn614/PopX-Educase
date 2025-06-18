@@ -40,12 +40,10 @@ app.post("/api/login", async (req, res) => {
     // Compare password with hashed password
     const isMatch = await compare(password, user.password);
     if (!isMatch) {
-      return res
-        .status(401)
-        .json({
-          success: "false",
-          error: "Invalid email or password. Create Account if not registered",
-        });
+      return res.status(401).json({
+        success: "false",
+        error: "Invalid email or password. Create Account if not registered",
+      });
     }
 
     return res.json({
@@ -83,13 +81,11 @@ app.post("/api/register", async (req, res) => {
     // Check if user already exists
     const existingUser = users.find((u) => u.email === email);
     if (existingUser) {
-      return res
-        .status(409)
-        .json({
-          success: "false",
-          error:
-            "User with same email already exists.Try Login or Different email",
-        });
+      return res.status(409).json({
+        success: "false",
+        error:
+          "User with same email already exists.Try Login or Different email",
+      });
     }
 
     // Hash the password

@@ -121,7 +121,8 @@ app.post("/api/register", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+// Start the server
+const server = app.listen(PORT, () => {
   console.log(
     `Server running on port ${PORT} in ${
       process.env.NODE_ENV || "development"
@@ -129,3 +130,6 @@ app.listen(PORT, () => {
   );
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+// Export app and server for external use
+export { app, server };

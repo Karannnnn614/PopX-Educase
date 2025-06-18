@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"node server/express.js\" \"npm run dev --prefix client\""
+    "start": "concurrently \"node server/index.js\" \"npm run dev --prefix client\"",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "cd client && npm install && npm run build",
+    "build:server": "cd server && npm install && npm run build",
+    "install:all": "npm install && npm install --prefix client && npm install --prefix server"
   },
   "keywords": [],
   "author": "",

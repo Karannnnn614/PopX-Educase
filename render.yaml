@@ -8,5 +8,5 @@ services:
   - type: web
     name: react-login-server
     env: node
-    buildCommand: npm run build:server
+    buildCommand: cd server && npm install && npm run build
     startCommand: cd server && npm start

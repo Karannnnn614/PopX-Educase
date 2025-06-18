@@ -3,13 +3,22 @@ import cors from "cors";
 import { compare, hash } from "bcryptjs";
 import { readFile, writeFile } from "fs/promises";
 import dotenv from "dotenv";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+
+// Get current file's directory path (for ES modules)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Load environment variables
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const USERS_FILE_PATH = process.env.USERS_FILE_PATH || "./users.json";
+// Ensure path resolution works correctly in both development and production
+const USERS_FILE_PATH = process.env.USERS_FILE_PATH
+  ? join(__dirname, process.env.USERS_FILE_PATH)
+  : join(__dirname, "users.json");
 const BCRYPT_SALT_ROUNDS = parseInt(process.env.BCRYPT_SALT_ROUNDS || "10");
 
 // Configure CORS with options from environment if available
